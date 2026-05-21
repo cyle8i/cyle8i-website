@@ -63,3 +63,72 @@ window.addEventListener("load", () => {
   }, 1500);
 
 });
+
+const serviceCards = document.querySelectorAll(".hero-service-card");
+const serviceModal = document.querySelector(".service-modal");
+const closeServiceModal = document.querySelector(".close-service-modal");
+const serviceTitle = document.getElementById("serviceTitle");
+const serviceContent = document.getElementById("serviceContent");
+
+const serviceData = {
+  premium: {
+    title: "premium subscriptions",
+    content: `
+      <ul>
+        <li>premium streaming access</li>
+        <li>creative & editing tools</li>
+        <li>working tools & productivity</li>
+        <li>fast & reliable process</li>
+      </ul>
+      <div class="service-price">start from 5k</div>
+    `
+  },
+
+  discord: {
+    title: "discord solutions",
+    content: `
+      <ul>
+        <li>nitro promotion</li>
+        <li>server boost</li>
+        <li>aged discord account</li>
+        <li>profile decoration & effect</li>
+      </ul>
+      <div class="service-price">start from 25k</div>
+    `
+  },
+
+  setup: {
+    title: "creative setup services",
+    content: `
+      <ul>
+        <li>aesthetic server layout</li>
+        <li>roles, channels, rules setup</li>
+        <li>ticket and bot configuration</li>
+        <li>professional setup</li>
+      </ul>
+      <div class="service-price">start from 25k</div>
+    `
+  }
+};
+if(serviceModal){
+  document.body.appendChild(serviceModal);
+}
+
+serviceCards.forEach((card) => {
+  card.addEventListener("click", () => {
+    const service = card.dataset.service;
+
+    serviceTitle.innerHTML = serviceData[service].title;
+    serviceContent.innerHTML = serviceData[service].content;
+
+    serviceModal.classList.add("active");
+
+    document.body.style.overflow = "hidden";
+  });
+});
+
+closeServiceModal.addEventListener("click", () => {
+  serviceModal.classList.remove("active");
+
+  document.body.style.overflow = "auto";
+});
